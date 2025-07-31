@@ -1,0 +1,7 @@
+scanpy
+squidpy
+leidenalg
+python-igraph
+tqdm
+torch
+torch_geometric 
