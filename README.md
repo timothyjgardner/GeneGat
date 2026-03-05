@@ -10,6 +10,18 @@ The full workflow is divided into four main stages:
 
 ---
 
+## Comparison with TissueFormer
+
+[TissueFormer](https://github.com/example/TissueFormer) is a transformer-based model for spatial transcriptomics that uses self-attention over tissue regions rather than explicit graph construction. While both GeneGat and TissueFormer aim to learn spatially-aware representations of gene expression, they differ in key ways:
+
+*   **Graph construction vs. learned attention:** GeneGat builds an explicit spatial graph (via k-nearest neighbors) and propagates information with GCN/GAT layers, whereas TissueFormer relies on transformer-style self-attention to implicitly capture spatial relationships.
+*   **Scalability trade-offs:** GeneGat's sparse graph structure tends to be more memory-efficient on large tissue sections, while TissueFormer's dense attention can capture longer-range dependencies at higher computational cost.
+*   **Self-supervised objectives:** Both models support self-supervised pretraining, but they employ different reconstruction and contrastive loss formulations.
+
+For a detailed side-by-side analysis of architecture, performance, and use cases, see the [GeneGat vs. TissueFormer Comparison (PDF)](gene_gat_vs_tissueformer_comparison.pdf).
+
+---
+
 ## Setup and Installation
 
 This project is designed to be run with Python 3.10.
