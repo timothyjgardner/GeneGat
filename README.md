@@ -121,4 +121,10 @@ This script is recommended for comparing results across datasets. It performs a 
 ```bash
 python3.10 visualize_latents_globally.py --input_file processed_data_inference_latents.h5ad
 ```
-This will generate new images with the `global_` prefix in their filenames. 
+This will generate new images with the `global_` prefix in their filenames.
+
+### Example Output
+
+Below is an example of a globally consistent spatial PCA visualization produced by the GAT model inference:
+
+![Global Spatial PCA RGB — GAT Inference](global_spatial_pca_rgb_gat_inference.png)
