@@ -12,11 +12,11 @@ The full workflow is divided into four main stages:
 
 ## Comparison with TissueFormer
 
-[TissueFormer](https://github.com/example/TissueFormer) is a transformer-based model for spatial transcriptomics that uses self-attention over tissue regions rather than explicit graph construction. While both GeneGat and TissueFormer aim to learn spatially-aware representations of gene expression, they differ in key ways:
+[TissueFormer](https://www.biorxiv.org/content/10.1101/2025.08.17.670735v1.full) (Benjamin & Zador, 2025) is a Transformer-based neural network that analyzes groups of single-cell RNA profiles to predict population-level labels (e.g., brain region) while retaining single-cell resolution. It uses a two-stage architecture: a single-cell module based on Geneformer (a pretrained BERT model) to embed each cell, followed by Transformer self-attention layers that attend across all cells in a group to capture compositional and diversity signals. While both GeneGat and TissueFormer address spatial transcriptomics, they differ in key ways:
 
-*   **Graph construction vs. learned attention:** GeneGat builds an explicit spatial graph (via k-nearest neighbors) and propagates information with GCN/GAT layers, whereas TissueFormer relies on transformer-style self-attention to implicitly capture spatial relationships.
-*   **Scalability trade-offs:** GeneGat's sparse graph structure tends to be more memory-efficient on large tissue sections, while TissueFormer's dense attention can capture longer-range dependencies at higher computational cost.
-*   **Self-supervised objectives:** Both models support self-supervised pretraining, but they employ different reconstruction and contrastive loss formulations.
+*   **Graph-based vs. group-based:** GeneGat builds an explicit spatial graph (via k-nearest neighbors) and propagates information with GCN/GAT layers at the individual cell level. TissueFormer instead groups nearby cells into cylindrical columns and uses Transformer self-attention across the group to integrate information from multiple cells simultaneously.
+*   **Self-supervised vs. supervised:** GeneGat is a self-supervised model that learns latent representations of cells by reconstructing gene expression from spatial context. TissueFormer is primarily a supervised classifier—its single-cell module can be initialized with self-supervised pretrained weights (masked gene prediction), but the overall model is trained end-to-end to predict tissue labels.
+*   **Cell-level vs. population-level:** GeneGat produces per-cell latent embeddings that capture spatially-aware gene expression patterns. TissueFormer produces a single prediction for a group of cells, leveraging cell-type composition and transcriptomic diversity within the group—its accuracy scales logarithmically with group size.
 
 For a detailed side-by-side analysis of architecture, performance, and use cases, see the [GeneGat vs. TissueFormer Comparison (PDF)](gene_gat_vs_tissueformer_comparison.pdf).
 
